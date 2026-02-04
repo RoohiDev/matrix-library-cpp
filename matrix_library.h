@@ -16,7 +16,7 @@ void vector_add(double A[], double B[], double result[], int size);
 void vector_sub(double A[], double B[], double result[], int size);
 void vector_scalar_multiply(double A[], double result[], int size, double scalar);
 double vector_dot(double A[], double B[], int size);
-void vector_cross(double A[], double B[], double result[]); //only for 3D vectors
+void vector_cross(double A[], double B[], double result[], int size);
 double vector_magnitude(double V[], int size);
 void vector_normalize(double V[], double result[], int size);
 
