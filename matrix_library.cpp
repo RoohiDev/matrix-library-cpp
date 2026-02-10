@@ -5,7 +5,7 @@
 using namespace std;
 
 //Matrix Operations
-void matrix_add(double A[][10], double B[][10], double result[][10], int rows, int cols){
+void matrix_add(const double A[][10], const double B[][10], double result[][10], int rows, int cols){
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
             result[i][j] = A[i][j] + B[i][j];
@@ -13,7 +13,7 @@ void matrix_add(double A[][10], double B[][10], double result[][10], int rows, i
     }
 }
 //result[i][j] = Σ A[i][k] x B[k][j]
-void matrix_multiply(double A[][10], double B[][10], double result[][10], int rowsA, int colsA, int colsB){
+void matrix_multiply(const double A[][10], const double B[][10], double result[][10], int rowsA, int colsA, int colsB){
     for(int i = 0; i < rowsA; i++){
         for(int j = 0; j < colsB; j++){
             result[i][j] = 0;
@@ -23,14 +23,14 @@ void matrix_multiply(double A[][10], double B[][10], double result[][10], int ro
         }
     }
 }
-void matrix_scalar_multiply(double A[][10], double result[][10], int rows, int cols, double scalar){
+void matrix_scalar_multiply(const double A[][10], double result[][10], int rows, int cols, double scalar){
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
             result[i][j] = A[i][j] * scalar;
         }
     }
 }
-void matrix_sub(double A[][10], double B[][10], double result[][10], int rows, int cols){
+void matrix_sub(const double A[][10], const double B[][10], double result[][10], int rows, int cols){
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
             result[i][j] = A[i][j] - B[i][j];
@@ -38,7 +38,7 @@ void matrix_sub(double A[][10], double B[][10], double result[][10], int rows, i
     }
 }
 //result[j][i] = A[i][j]
-void matrix_transpose(double A[][10], double result[][10], int rows, int cols){
+void matrix_transpose(const double A[][10], double result[][10], int rows, int cols){
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
             result[j][i] = A[i][j];
@@ -46,7 +46,7 @@ void matrix_transpose(double A[][10], double result[][10], int rows, int cols){
     }
 }
 //Laplace Expansion(using first row)
-double matrix_determinant(double A[][10],int n){
+double matrix_determinant(const double A[][10],int n){
     if(n == 1) return A[0][0];
     if(n == 2) return ((A[0][0] * A[1][1]) - (A[0][1] * A [1][0]));
     double det = 0;
@@ -68,7 +68,7 @@ double matrix_determinant(double A[][10],int n){
     return det;
 }
 // A^(-1) = 1/det(A) x adj(A)
-void adjoint(double A[][10], double adj[][10], int n){
+void adjoint(const double A[][10], double adj[][10], int n){
     if(n == 1){
         adj[0][0] = 1;
         return;
@@ -94,7 +94,7 @@ void adjoint(double A[][10], double adj[][10], int n){
         }
     }
 }
-void matrix_inverse(double A[][10], double result[][10], int n){
+void matrix_inverse(const double A[][10], double result[][10], int n){
     double det = matrix_determinant(A,n);
     if (det == 0){
         cout << "Error! Singular matrix inverse dose not exist." << endl;
@@ -110,29 +110,29 @@ void matrix_inverse(double A[][10], double result[][10], int n){
 }
 
 //Vector Operations
-void vector_add(double A[], double B[], double result[], int size){
+void vector_add(const double A[], const double B[], double result[], int size){
     for (int i = 0; i < size; i++){
         result[i] = A[i] + B[i];
     }
 }
-void vector_sub(double A[], double B[], double result[], int size){
+void vector_sub(const double A[], const double B[], double result[], int size){
     for (int i = 0; i < size; i++){
         result[i] = A[i] - B[i];
     }
 }
-void vector_scalar_multiply(double A[], double result[], int size, double scalar){
+void vector_scalar_multiply(const double A[], double result[], int size, double scalar){
     for (int i = 0; i < size; i++){
         result[i] = A[i] * scalar;
     }
 }
-double vector_dot(double A[], double B[], int size){
+double vector_dot(const double A[], const double B[], int size){
     double dot_result = 0;
     for (int i = 0; i < size; i++){
         dot_result += A[i] * B[i];
     }
     return dot_result;
 }
-void vector_cross(double A[], double B[], double result[], int size){
+void vector_cross(const double A[], const double B[], double result[], int size){
     if(size != 3){
         cout << "Error! Cross product is only defined for 3D vectors.";
         return;
@@ -141,7 +141,7 @@ void vector_cross(double A[], double B[], double result[], int size){
     result[1] = (A[2] * B[0]) - (A[0] * B[2]);
     result[2] = (A[0] * B[1]) - (A[1] * B[0]);
 }
-double vector_magnitude(double V[], int size){
+double vector_magnitude(const double V[], int size){
     double sum = 0;
     for (int i = 0; i < size; i++){
         sum += (V[i] * V[i]);
@@ -149,7 +149,7 @@ double vector_magnitude(double V[], int size){
     return sqrt(sum);    
 }
 //normalized vector = V[i] / |V| (|V| != 0)
-void vector_normalize(double V[], double result[], int size){
+void vector_normalize(const double V[], double result[], int size){
     double mag = vector_magnitude(V,size);
     if (mag == 0) return;
     for(int i = 0; i < size; i++){
