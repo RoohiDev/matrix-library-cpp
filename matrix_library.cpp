@@ -68,7 +68,7 @@ double matrix_determinant(const double A[][10],int n){
     return det;
 }
 // A^(-1) = 1/det(A) x adj(A)
-void adjoint(const double A[][10], double adj[][10], int n){
+void matrix_adjoint(const double A[][10], double adj[][10], int n){
     if(n == 1){
         adj[0][0] = 1;
         return;
@@ -101,7 +101,7 @@ void matrix_inverse(const double A[][10], double result[][10], int n){
         return;
     }
     double adj[10][10];
-    adjoint(A,adj,n);
+    matrix_adjoint(A,adj,n);
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
             result[i][j] = (adj[i][j] / det);
