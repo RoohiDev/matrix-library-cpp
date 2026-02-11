@@ -63,7 +63,7 @@ double matrix_determinant(const double A[][10],int n){
             }
             subi++;
         }
-        det += ((col &1 ) ? -1 : 1) * A[0][col] * matrix_determinant(submatrix,n-1);
+        det += ((col & 1) ? -1 : 1) * A[0][col] * matrix_determinant(submatrix,n-1);
     }
     return det;
 }

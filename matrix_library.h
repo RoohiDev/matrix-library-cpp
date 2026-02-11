@@ -14,12 +14,10 @@ void matrix_inverse(const double A[][10], double result[][10], int n); //only in
 //Vector Operations
 void vector_add(const double A[], const double B[], double result[], int size);
 void vector_sub(const double A[], const double B[], double result[], int size);
-void vector_scalar_multiply(const double A[], const double result[], int size, double scalar);
+void vector_scalar_multiply(const double A[], double result[], int size, double scalar);
 double vector_dot(const double A[], const double B[], int size);
 void vector_cross(const double A[], const double B[], double result[], int size);
 double vector_magnitude(const double V[], int size);
 void vector_normalize(const double V[], double result[], int size);
-
-
 
 #endif

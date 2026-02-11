@@ -55,7 +55,7 @@ int main(){
     html << ".error{color: red; font-weight: bold;}";
     html << "</style>";
     html << "</head>";
-    html << "<header><body>";
+    html << "<body><header>";
     html <<"<h1>Matrix & Vector Operations Report</h1>";
     html << "<h2>Amirhossein Rouhi - Fundamentals of Computer Programming Final Project</h2>";
     html << "</header>";
