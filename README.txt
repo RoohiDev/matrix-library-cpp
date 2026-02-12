@@ -24,13 +24,19 @@ If an operation needs only one matrix (like transpose, determinant, inverse), th
 Checks if matrix sizes are okay for addition, subtraction, and multiplication.
 Checks if matrix is square for determinant and inverse.
 Checks if determinant is zero before trying to find inverse.
-Checks vector size for cross product and normalization.
+Checks vector sizes for addition, subtraction, dot product, cross product, and normalization.
+Checks for zero magnitude before normalization.
 
 ============================ HOW TO USE DEMONSTRATION ============================
 
 ● How to Compile & Run:
-g++ matrix_library.cpp demonstration.cpp -o demo
-./demo
+-On Windows (using MinGW / g++):
+    g++ matrix_library.cpp demonstration.cpp -o demo.exe
+    demo.exe
+-On macOS or Linux
+    g++ matrix_library.cpp demonstration.cpp -o demo
+    ./demo
+Note:
 Put matrix_library.cpp and demonstration.cpp in the same folder.
 After running, the demo creates report_sample.html automatically.
 
