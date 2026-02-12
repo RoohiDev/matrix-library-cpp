@@ -108,7 +108,7 @@ bool matrix_inverse(const double A[][10], double result[][10], int rowsA, int co
     double det = matrix_determinant(A, rowsA, colsA);
     if (fabs(det) < 1e-10) return false;
     double adj[10][10];
-    matrix_adjoint(A,adj,rowsA,colsA);
+    if(!matrix_adjoint(A, adj, rowsA, colsA)) return false;
     for(int i = 0; i < rowsA; i++){
         for(int j = 0; j < rowsA; j++){
             result[i][j] = (adj[i][j] / det);
