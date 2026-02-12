@@ -5,15 +5,18 @@
 using namespace std;
 
 //Matrix Operations
-void matrix_add(const double A[][10], const double B[][10], double result[][10], int rows, int cols){
-    for(int i = 0; i < rows; i++){
-        for(int j = 0; j < cols; j++){
+bool matrix_add(const double A[][10], const double B[][10], double result[][10], int rowsA, int colsA, int rowsB, int colsB){
+    if(rowsA != rowsB || colsA != colsB) return false;
+    for(int i = 0; i < rowsA; i++){
+        for(int j = 0; j < colsA; j++){
             result[i][j] = A[i][j] + B[i][j];
         }
     }
+    return true;
 }
 //result[i][j] = Σ A[i][k] x B[k][j]
-void matrix_multiply(const double A[][10], const double B[][10], double result[][10], int rowsA, int colsA, int colsB){
+bool matrix_multiply(const double A[][10], const double B[][10], double result[][10], int rowsA, int colsA, int rowsB, int colsB){
+    if(colsA != rowsB) return false;
     for(int i = 0; i < rowsA; i++){
         for(int j = 0; j < colsB; j++){
             result[i][j] = 0;
@@ -22,6 +25,7 @@ void matrix_multiply(const double A[][10], const double B[][10], double result[]
             }
         }
     }
+    return true;
 }
 void matrix_scalar_multiply(const double A[][10], double result[][10], int rows, int cols, double scalar){
     for(int i = 0; i < rows; i++){
@@ -30,12 +34,14 @@ void matrix_scalar_multiply(const double A[][10], double result[][10], int rows,
         }
     }
 }
-void matrix_sub(const double A[][10], const double B[][10], double result[][10], int rows, int cols){
-    for(int i = 0; i < rows; i++){
-        for(int j = 0; j < cols; j++){
+bool matrix_sub(const double A[][10], const double B[][10], double result[][10], int rowsA, int colsA, int rowsB, int colsB){
+    if(rowsA != rowsB || colsA != colsB) return false;
+    for(int i = 0; i < rowsA; i++){
+        for(int j = 0; j < colsA; j++){
             result[i][j] = A[i][j] - B[i][j];
         }
     }
+    return true;
 }
 //result[j][i] = A[i][j]
 void matrix_transpose(const double A[][10], double result[][10], int rows, int cols){
@@ -46,43 +52,45 @@ void matrix_transpose(const double A[][10], double result[][10], int rows, int c
     }
 }
 //Laplace Expansion(using first row)
-double matrix_determinant(const double A[][10],int n){
-    if(n == 1) return A[0][0];
-    if(n == 2) return ((A[0][0] * A[1][1]) - (A[0][1] * A [1][0]));
+double matrix_determinant(const double A[][10],int rowsA, int colsA){
+    if(rowsA != colsA) return NAN;
+    if(rowsA == 1) return A[0][0];
+    if(rowsA == 2) return ((A[0][0] * A[1][1]) - (A[0][1] * A [1][0]));
     double det = 0;
     double submatrix [10][10];
     // col: index of the column to be deleted
-    for(int col = 0; col < n; col++) {
+    for(int col = 0; col < rowsA; col++) {
         int subi = 0;
-        for(int i = 1; i < n; i++){
+        for(int i = 1; i < rowsA; i++){
             int subj = 0;
-            for(int j = 0; j < n; j++){
+            for(int j = 0; j < rowsA; j++){
                 if(j == col) continue; //delete this column
                 submatrix[subi][subj] = A[i][j];
                 subj++;
             }
             subi++;
         }
-        det += ((col & 1) ? -1 : 1) * A[0][col] * matrix_determinant(submatrix,n-1);
+        det += ((col & 1) ? -1 : 1) * A[0][col] * matrix_determinant(submatrix, (rowsA-1), (colsA-1));
     }
     return det;
 }
 // A^(-1) = 1/det(A) x adj(A)
-void matrix_adjoint(const double A[][10], double adj[][10], int n){
-    if(n == 1){
+bool matrix_adjoint(const double A[][10], double adj[][10], int rowsA, int colsA){
+    if(rowsA != colsA) return false;
+    if(rowsA == 1){
         adj[0][0] = 1;
-        return;
+        return true;
     }
     double temp[10][10];
     int sign;
 
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
+    for(int i = 0; i < rowsA; i++){
+        for(int j = 0; j < rowsA; j++){
             int subi = 0;
-            for(int row = 0; row < n; row++){
+            for(int row = 0; row < rowsA; row++){
                 if(row == i) continue; //delete this row
                 int subj = 0;
-                for(int col = 0; col < n; col++){
+                for(int col = 0; col < rowsA; col++){
                     if(col == j) continue; //delete this column
                     temp[subi][subj] = A[row][col];
                     subj++;
@@ -90,23 +98,23 @@ void matrix_adjoint(const double A[][10], double adj[][10], int n){
             subi++;    
             }
             sign = (((i+j) & 1) ? -1 : 1);
-            adj[j][i] = sign * matrix_determinant(temp,(n-1)); //cofactor and transpose
+            adj[j][i] = sign * matrix_determinant(temp, (rowsA-1), (colsA-1)); //cofactor and transpose
         }
     }
+    return true;
 }
-void matrix_inverse(const double A[][10], double result[][10], int n){
-    double det = matrix_determinant(A,n);
-    if (det == 0){
-        cout << "Error! Singular matrix inverse dose not exist." << endl;
-        return;
-    }
+bool matrix_inverse(const double A[][10], double result[][10], int rowsA, int colsA){
+    if(rowsA != colsA) return false;
+    double det = matrix_determinant(A, rowsA, colsA);
+    if (fabs(det) < 1e-10) return false;
     double adj[10][10];
-    matrix_adjoint(A,adj,n);
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
+    matrix_adjoint(A,adj,rowsA,colsA);
+    for(int i = 0; i < rowsA; i++){
+        for(int j = 0; j < rowsA; j++){
             result[i][j] = (adj[i][j] / det);
         }
     }
+    return true;
 }
 
 //Vector Operations
@@ -132,16 +140,17 @@ double vector_dot(const double A[], const double B[], int size){
     }
     return dot_result;
 }
-void vector_cross(const double A[], const double B[], double result[], int size){
+bool vector_cross(const double A[], const double B[], double result[], int size){
     if(size != 3){
-        cout << "Error! Cross product is only defined for 3D vectors.";
-        return;
+        return false;
     } 
     result[0] = (A[1] * B[2]) - (A[2] * B[1]);
     result[1] = (A[2] * B[0]) - (A[0] * B[2]);
     result[2] = (A[0] * B[1]) - (A[1] * B[0]);
+    return true;
 }
 double vector_magnitude(const double V[], int size){
+    if(size <= 0) return NAN;
     double sum = 0;
     for (int i = 0; i < size; i++){
         sum += (V[i] * V[i]);
@@ -149,10 +158,11 @@ double vector_magnitude(const double V[], int size){
     return sqrt(sum);    
 }
 //normalized vector = V[i] / |V| (|V| != 0)
-void vector_normalize(const double V[], double result[], int size){
+bool vector_normalize(const double V[], double result[], int size){
     double mag = vector_magnitude(V,size);
-    if (mag == 0) return;
+    if (fabs(mag) < 1e-10) return false;
     for(int i = 0; i < size; i++){
         result[i] = V[i] / mag; 
     }
+    return true;
 }

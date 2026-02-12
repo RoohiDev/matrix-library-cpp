@@ -133,9 +133,8 @@ int main(){
 
     //A + B
     html <<"<h3>A + B</h3>";
-    if(rowsA == rowsB && colsA == colsB){
+    if(matrix_add(mat_A, mat_B, mat_result, rowsA, colsA, rowsB, colsB)){
         cout << "\nA + B =" << endl;
-        matrix_add(mat_A, mat_B, mat_result, rowsA, colsA);
         print_matrix(mat_result, rowsA, colsA);
         html << "<p><b>Result(" << rowsA << " x " << colsA << "):</b></p>";
         print_matrix_html(html, mat_result, rowsA, colsA);
@@ -145,9 +144,8 @@ int main(){
     }
     //A - B
     html <<"<h3>A - B</h3>";
-    if(rowsA == rowsB && colsA == colsB){
+    if(matrix_sub(mat_A, mat_B, mat_result, rowsA, colsA, rowsB, colsB)){
         cout << "\nA - B =" << endl;
-        matrix_sub(mat_A, mat_B, mat_result, rowsA, colsA);
         print_matrix(mat_result, rowsA, colsA);
         html << "<p><b>Result (" << rowsA << " x " << colsA << "):</b></p>";
         print_matrix_html(html, mat_result, rowsA, colsA);
@@ -157,18 +155,17 @@ int main(){
     }
     //A x B
     html <<"<h3>A x B</h3>";
-    if(colsA != rowsB){
-        cout << "Error! Matrix multiplication not possible (colsA != rowsB)" << endl;
-        html << "<p class='error'>&#10060; Error! Matrix multiplication not possible (colsA != rowsB)</p>";
-    }else{
+    if(matrix_multiply(mat_A, mat_B, mat_result, rowsA, colsA, rowsB, colsB)){
         cout << "\nA x B =" << endl;
-        matrix_multiply(mat_A, mat_B, mat_result, rowsA, colsA, colsB);
         print_matrix(mat_result, rowsA, colsB);
         html << "<p><b>Result (" << rowsA << " x " << colsB << "):</b></p>";
         print_matrix_html(html, mat_result, rowsA, colsB);
+    }else{
+        cout << "Error! Matrix multiplication not possible (colsA != rowsB)" << endl;
+        html << "<p class='error'>&#10060; Error! Matrix multiplication not possible (colsA != rowsB)</p>";
     }
     //kA
-    double k = 3; //scalar multiplication factor
+    double k = 3.0; //scalar multiplication factor
     html <<"<h3>kA(k = " << k << ")</h3>";
     cout <<"\nkA(k = " << k << ") =" << endl;
     matrix_scalar_multiply(mat_A, mat_result, rowsA, colsA, k);
@@ -184,30 +181,29 @@ int main(){
     print_matrix_html(html, mat_result, colsA, rowsA);
     //|A|
     html <<"<h3>|A|</h3>";
-    if(rowsA != colsA){
-        cout << "Error! Determinant is defined only for square matrix" << endl;
-        html << "<p class='error'>&#10060; Error! Determinant is defined only for square matrix</p>";
-    }else{
-        double det = matrix_determinant(mat_A, rowsA);
+    double det = matrix_determinant(mat_A, rowsA, colsA);
+    if(!isnan(det)){
         cout << "\n|A| = " << det << endl;
         html << "<p><b>Result = " << det << "</b></p>";
+    }else{
+    cout << "Error! Determinant is defined only for square matrix" << endl;
+    html << "<p class='error'>&#10060; Error! Determinant is defined only for square matrix</p>";    
+
     }
     //A⁻¹
     html << "<h3>A<sup>-1</sup></h3>";
-    if(rowsA != colsA){
-        cout << "Error! Inverse is defined only for square matrix" << endl;
-        html << "<p class='error'>&#10060; Error! Inverse is defined only for square matrix</p>";
+    if(matrix_inverse(mat_A, mat_result, rowsA, colsA)){
+        cout << "\nA^(-1) =" << endl;
+        print_matrix(mat_result, rowsA, colsA);
+        html << "<p><b>Result (" << rowsA << " x " << colsA << "):</b></p>";
+        print_matrix_html(html, mat_result, rowsA, colsA);
     }else{
-        double det = matrix_determinant(mat_A, rowsA);
-        if(det == 0){
-            cout << "Error! Determinant is zero. Matrix is not invertible" << endl;
-            html << "<p class='error'>&#10060; Error! Determinant is zero. Matrix is not invertible</p>";
+        if(rowsA != colsA){
+            cout << "Error! Inverse is defined only for square matrix" << endl;
+            html << "<p class='error'>&#10060; Error! Inverse is defined only for square matrix</p>";
         }else{
-            matrix_inverse(mat_A, mat_result, rowsA);
-            cout << "\nA^(-1) =" << endl;
-            print_matrix(mat_result, rowsA, colsA);
-            html << "<p><b>Result (" << rowsA << " x " << colsA << "):</b></p>";
-            print_matrix_html(html, mat_result, rowsA, colsA);
+            cout << "Error! Matrix is singular(det = 0)" << endl;
+            html << "<p class='error'>&#10060; Error! Matrix is singular(det = 0)</p>";
         }
     }
     html << "</section>";
@@ -242,11 +238,15 @@ int main(){
     html << "<p><b>Result = " << dot << "</b></p>";    
     //A x B
     html <<"<h3>A x B</h3>";
-    cout << "\nA x B =" << endl;
-    vector_cross(vec_A, vec_B, vec_result, vec_size);
-    print_vector(vec_result, vec_size);
-    html << "<p><b>Result (size = " << vec_size << "):</b></p>";
-    print_vector_html(html, vec_result, vec_size);
+    if(vector_cross(vec_A, vec_B, vec_result, vec_size)){
+        cout << "\nA x B =" << endl;
+        print_vector(vec_result, vec_size);
+        html << "<p><b>Result (size = " << vec_size << "):</b></p>";
+        print_vector_html(html, vec_result, vec_size);   
+    }else{
+        cout << "Error! Cross product defined only for 3D vectors" << endl;
+        html << "<p class='error'>&#10060; Error! Cross product defined only for 3D vectors</p>";
+    }
     //|V|
     double mag = vector_magnitude(vec_A, vec_size);
     html <<"<h3>|A|</h3>";
@@ -254,11 +254,15 @@ int main(){
     html << "<p><b>Result = " << mag << "</b></p>";    
     //V_hat(normalized vector)
     html <<"<h3>V&#770;(Normalized Vector)</h3>";
+    if(vector_normalize(vec_A, vec_result, vec_size)){
     cout << "\nV_hat(normalized vector) =" << endl;
-    vector_normalize(vec_A, vec_result, vec_size);
     print_vector(vec_result, vec_size);
     html << "<p><b>Result (size = " << vec_size << "):</b></p>";
     print_vector_html(html, vec_result, vec_size);
+    }else{
+        cout << "Error! Cannot normalize zero vector" << endl;
+            html << "<p class='error'>&#10060; Error! Cannot normalize zero vector</p>";
+    }
     html << "</section>";
     html << "<footer><p>Generated by Matrix C++ Library</p></footer>";
     html << "</body></html>";
