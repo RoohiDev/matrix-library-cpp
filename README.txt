@@ -85,3 +85,6 @@ https://www.fileformat.info/info/unicode/char/00d7/index.htm
 
 8.isnan function in C++:
 https://en.cppreference.com/w/cpp/numeric/math/isnan.html
+
+9.MIT LICENSE:
+https://en.wikipedia.org/wiki/MIT_License
