@@ -5,22 +5,22 @@
 using namespace std;
 
 //Matrix Operations
-bool matrix_add(const double A[][10], const double B[][10], double result[][10], int rowsA, int colsA, int rowsB, int colsB){
-    if(rowsA != rowsB || colsA != colsB) return false;
-    for(int i = 0; i < rowsA; i++){
-        for(int j = 0; j < colsA; j++){
+bool matrix_add(const double A[][10], const double B[][10], double result[][10], int rows_A, int cols_A, int rows_B, int cols_B){
+    if(rows_A != rows_B || cols_A != cols_B) return false;
+    for(int i = 0; i < rows_A; i++){
+        for(int j = 0; j < cols_A; j++){
             result[i][j] = A[i][j] + B[i][j];
         }
     }
     return true;
 }
 //result[i][j] = Σ A[i][k] x B[k][j]
-bool matrix_multiply(const double A[][10], const double B[][10], double result[][10], int rowsA, int colsA, int rowsB, int colsB){
-    if(colsA != rowsB) return false;
-    for(int i = 0; i < rowsA; i++){
-        for(int j = 0; j < colsB; j++){
+bool matrix_multiply(const double A[][10], const double B[][10], double result[][10], int rows_A, int cols_A, int rows_B, int cols_B){
+    if(cols_A != rows_B) return false;
+    for(int i = 0; i < rows_A; i++){
+        for(int j = 0; j < cols_B; j++){
             result[i][j] = 0;
-            for(int k = 0; k < colsA; k++){
+            for(int k = 0; k < cols_A; k++){
                 result[i][j] += A[i][k] * B[k][j];  
             }
         }
@@ -34,10 +34,10 @@ void matrix_scalar_multiply(const double A[][10], double result[][10], int rows,
         }
     }
 }
-bool matrix_sub(const double A[][10], const double B[][10], double result[][10], int rowsA, int colsA, int rowsB, int colsB){
-    if(rowsA != rowsB || colsA != colsB) return false;
-    for(int i = 0; i < rowsA; i++){
-        for(int j = 0; j < colsA; j++){
+bool matrix_sub(const double A[][10], const double B[][10], double result[][10], int rows_A, int cols_A, int rows_B, int cols_B){
+    if(rows_A != rows_B || cols_A != cols_B) return false;
+    for(int i = 0; i < rows_A; i++){
+        for(int j = 0; j < cols_A; j++){
             result[i][j] = A[i][j] - B[i][j];
         }
     }
@@ -52,45 +52,45 @@ void matrix_transpose(const double A[][10], double result[][10], int rows, int c
     }
 }
 //Laplace Expansion(using first row)
-double matrix_determinant(const double A[][10],int rowsA, int colsA){
-    if(rowsA != colsA) return NAN;
-    if(rowsA == 1) return A[0][0];
-    if(rowsA == 2) return ((A[0][0] * A[1][1]) - (A[0][1] * A [1][0]));
+double matrix_determinant(const double A[][10],int rows_A, int cols_A){
+    if(rows_A != cols_A) return NAN;
+    if(rows_A == 1) return A[0][0];
+    if(rows_A == 2) return ((A[0][0] * A[1][1]) - (A[0][1] * A [1][0]));
     double det = 0;
     double submatrix [10][10];
     // col: index of the column to be deleted
-    for(int col = 0; col < rowsA; col++) {
+    for(int col = 0; col < rows_A; col++) {
         int subi = 0;
-        for(int i = 1; i < rowsA; i++){
+        for(int i = 1; i < rows_A; i++){
             int subj = 0;
-            for(int j = 0; j < rowsA; j++){
+            for(int j = 0; j < rows_A; j++){
                 if(j == col) continue; //delete this column
                 submatrix[subi][subj] = A[i][j];
                 subj++;
             }
             subi++;
         }
-        det += ((col & 1) ? -1 : 1) * A[0][col] * matrix_determinant(submatrix, (rowsA-1), (colsA-1));
+        det += ((col & 1) ? -1 : 1) * A[0][col] * matrix_determinant(submatrix, (rows_A-1), (cols_A-1));
     }
     return det;
 }
 // A^(-1) = 1/det(A) x adj(A)
-bool matrix_adjoint(const double A[][10], double adj[][10], int rowsA, int colsA){
-    if(rowsA != colsA) return false;
-    if(rowsA == 1){
+bool matrix_adjoint(const double A[][10], double adj[][10], int rows_A, int cols_A){
+    if(rows_A != cols_A) return false;
+    if(rows_A == 1){
         adj[0][0] = 1;
         return true;
     }
     double temp[10][10];
     int sign;
 
-    for(int i = 0; i < rowsA; i++){
-        for(int j = 0; j < rowsA; j++){
+    for(int i = 0; i < rows_A; i++){
+        for(int j = 0; j < rows_A; j++){
             int subi = 0;
-            for(int row = 0; row < rowsA; row++){
+            for(int row = 0; row < rows_A; row++){
                 if(row == i) continue; //delete this row
                 int subj = 0;
-                for(int col = 0; col < rowsA; col++){
+                for(int col = 0; col < rows_A; col++){
                     if(col == j) continue; //delete this column
                     temp[subi][subj] = A[row][col];
                     subj++;
@@ -98,19 +98,19 @@ bool matrix_adjoint(const double A[][10], double adj[][10], int rowsA, int colsA
             subi++;    
             }
             sign = (((i+j) & 1) ? -1 : 1);
-            adj[j][i] = sign * matrix_determinant(temp, (rowsA-1), (colsA-1)); //cofactor and transpose
+            adj[j][i] = sign * matrix_determinant(temp, (rows_A-1), (cols_A-1)); //cofactor and transpose
         }
     }
     return true;
 }
-bool matrix_inverse(const double A[][10], double result[][10], int rowsA, int colsA){
-    if(rowsA != colsA) return false;
-    double det = matrix_determinant(A, rowsA, colsA);
+bool matrix_inverse(const double A[][10], double result[][10], int rows_A, int cols_A){
+    if(rows_A != cols_A) return false;
+    double det = matrix_determinant(A, rows_A, cols_A);
     if (fabs(det) < 1e-10) return false;
     double adj[10][10];
-    if(!matrix_adjoint(A, adj, rowsA, colsA)) return false;
-    for(int i = 0; i < rowsA; i++){
-        for(int j = 0; j < rowsA; j++){
+    if(!matrix_adjoint(A, adj, rows_A, cols_A)) return false;
+    for(int i = 0; i < rows_A; i++){
+        for(int j = 0; j < rows_A; j++){
             result[i][j] = (adj[i][j] / det);
         }
     }

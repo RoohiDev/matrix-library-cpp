@@ -3,13 +3,13 @@
 #define MATRIX_LIBRARY_H
 
 //Matrix Operations
-bool matrix_add(const double A[][10], const double B[][10], double result[][10], int rowsA, int colsA, int rowsB, int colsB);
-bool matrix_multiply(const double A[][10], const double B[][10], double result[][10], int rowsA, int colsA, int rowsB, int colsB);
+bool matrix_add(const double A[][10], const double B[][10], double result[][10], int rows_A, int cols_A, int rows_B, int cols_B);
+bool matrix_multiply(const double A[][10], const double B[][10], double result[][10], int rows_A, int cols_A, int rows_B, int cols_B);
 void matrix_scalar_multiply(const double A[][10], double result[][10], int rows, int cols, double scalar);
-bool matrix_sub(const double A[][10], const double B[][10], double result[][10], int rowsA, int colsA, int rowsB, int colsB);
+bool matrix_sub(const double A[][10], const double B[][10], double result[][10], int rows_A, int cols_A, int rows_B, int cols_B);
 void matrix_transpose(const double A[][10], double result[][10], int rows, int cols);
-double matrix_determinant(const double A[][10],int rowsA, int colsA);
-bool matrix_inverse(const double A[][10], double result[][10], int rowsA, int colsA);
+double matrix_determinant(const double A[][10],int rows_A, int cols_A);
+bool matrix_inverse(const double A[][10], double result[][10], int rows_A, int cols_A);
 
 //Vector Operations
 void vector_add(const double A[], const double B[], double result[], int size);
