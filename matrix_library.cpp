@@ -118,32 +118,36 @@ bool matrix_inverse(const double A[][10], double result[][10], int rows_A, int c
 }
 
 //Vector Operations
-void vector_add(const double A[], const double B[], double result[], int size){
-    for (int i = 0; i < size; i++){
+bool vector_add(const double A[], const double B[], double result[], int size_A, int size_B){
+    if(size_A != size_B) return false;
+    for (int i = 0; i < size_A; i++){
         result[i] = A[i] + B[i];
     }
+    return true;
 }
-void vector_sub(const double A[], const double B[], double result[], int size){
-    for (int i = 0; i < size; i++){
+bool vector_sub(const double A[], const double B[], double result[], int size_A, int size_B){
+    if(size_A != size_B) return false;
+    for (int i = 0; i < size_A; i++){
         result[i] = A[i] - B[i];
     }
+    return true;
 }
 void vector_scalar_multiply(const double A[], double result[], int size, double scalar){
     for (int i = 0; i < size; i++){
         result[i] = A[i] * scalar;
     }
 }
-double vector_dot(const double A[], const double B[], int size){
+double vector_dot(const double A[], const double B[], int size_A, int size_B){
+    if(size_A != size_B) return NAN;
     double dot_result = 0;
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < size_A; i++){
         dot_result += A[i] * B[i];
     }
     return dot_result;
 }
-bool vector_cross(const double A[], const double B[], double result[], int size){
-    if(size != 3){
-        return false;
-    } 
+bool vector_cross(const double A[], const double B[], double result[], int size_A, int size_B){
+    if(size_A != size_B) return false;
+    if(size_A != 3) return false;
     result[0] = (A[1] * B[2]) - (A[2] * B[1]);
     result[1] = (A[2] * B[0]) - (A[0] * B[2]);
     result[2] = (A[0] * B[1]) - (A[1] * B[0]);

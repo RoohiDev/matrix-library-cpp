@@ -12,11 +12,11 @@ double matrix_determinant(const double A[][10],int rows_A, int cols_A);
 bool matrix_inverse(const double A[][10], double result[][10], int rows_A, int cols_A);
 
 //Vector Operations
-void vector_add(const double A[], const double B[], double result[], int size);
-void vector_sub(const double A[], const double B[], double result[], int size);
+bool vector_add(const double A[], const double B[], double result[], int size_A, int size_B);
+bool vector_sub(const double A[], const double B[], double result[], int size_A, int size_B);
 void vector_scalar_multiply(const double A[], double result[], int size, double scalar);
-double vector_dot(const double A[], const double B[], int size);
-bool vector_cross(const double A[], const double B[], double result[], int size);
+double vector_dot(const double A[], const double B[], int size_A, int size_B);
+bool vector_cross(const double A[], const double B[], double result[], int size_A, int size_B);
 double vector_magnitude(const double V[], int size);
 bool vector_normalize(const double V[], double result[], int size);
 
