@@ -75,27 +75,22 @@ The demo asks the user to enter the size and numbers for matrices and vectors. R
 
 ## SOURCES
 
-1. How to create a library in C++:  
-   [https://www.geeksforgeeks.org/cpp/how-do-i-create-a-library-in-cpp/](https://www.geeksforgeeks.org/cpp/how-do-i-create-a-library-in-cpp/)
+1. [How to create a library in C++](https://www.geeksforgeeks.org/cpp/how-do-i-create-a-library-in-cpp/)
 
-2. Matrix multiplication algorithm:  
-   [https://fa.wikipedia.org/wiki/الگوریتم‌های_ضرب_ماتریس](https://fa.wikipedia.org/wiki/الگوریتم‌های_ضرب_ماتریس)
+2. [Matrix multiplication algorithm](https://fa.wikipedia.org/wiki/الگوریتم‌های_ضرب_ماتریس)
 
-3. Laplace Expansion (Determinant):  
-   [https://youtu.be/c0N0itfpjFU](https://youtu.be/c0N0itfpjFU)
+3. [Laplace Expansion (Determinant)](https://youtu.be/c0N0itfpjFU)
 
-4. Adjoint Method (Inverse):  
-   [https://youtu.be/P3l7gGeHXC8](https://youtu.be/P3l7gGeHXC8)
+4. [Adjoint Method (Inverse)](https://youtu.be/P3l7gGeHXC8)
 
-5. ofstream class in C++:  
-   [https://www.w3schools.com/cpp/ref_fstream_ofstream.asp](https://www.w3schools.com/cpp/ref_fstream_ofstream.asp)
+5. [ofstream class in C++](https://www.w3schools.com/cpp/ref_fstream_ofstream.asp)
 
-6. CSS border-collapse Property:  
-   [https://www.w3schools.com/cssref/pr_border-collapse.php](https://www.w3schools.com/cssref/pr_border-collapse.php)
+6. [CSS border-collapse Property](https://www.w3schools.com/cssref/pr_border-collapse.php)
 
-7. UTF-8 Mathematical Operators:  
-   [https://cloford.com/resources/charcodes/utf-8_mathematical.htm](https://cloford.com/resources/charcodes/utf-8_mathematical.htm)  
-   [https://www.fileformat.info/info/unicode/char/00d7/index.htm](https://www.fileformat.info/info/unicode/char/00d7/index.htm)
+7. [UTF-8 dot product operator symbol](https://cloford.com/resources/charcodes/utf-8_mathematical.htm)
 
-8. isnan function in C++:  
-   [https://en.cppreference.com/w/cpp/numeric/math/isnan](https://en.cppreference.com/w/cpp/numeric/math/isnan)
+8. [UTF-8 multiplication operator symbol](https://www.fileformat.info/info/unicode/char/00d7/index.htm)
+
+9. [isnan function in C++ ](https://en.cppreference.com/w/cpp/numeric/math/isnan)
+
+10. [MIT LICENSE](https://en.wikipedia.org/wiki/MIT_License)

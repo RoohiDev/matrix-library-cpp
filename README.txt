@@ -79,12 +79,14 @@ https://www.w3schools.com/cpp/ref_fstream_ofstream.asp
 6.CSS border-collapse Property:
 https://www.w3schools.com/cssref/pr_border-collapse.php
 
-7.UTF-8 Mathematical Operators:
+7.UTF-8 dot operator symbol:
 https://cloford.com/resources/charcodes/utf-8_mathematical.htm
+
+8.UTF-8 multiplication operator symbol:
 https://www.fileformat.info/info/unicode/char/00d7/index.htm
 
-8.isnan function in C++:
+9.isnan function in C++:
 https://en.cppreference.com/w/cpp/numeric/math/isnan.html
 
-9.MIT LICENSE:
+10.MIT LICENSE:
 https://en.wikipedia.org/wiki/MIT_License
