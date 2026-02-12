@@ -255,7 +255,7 @@ int main(){
         print_vector_html(html, vec_result, vec_size_A);  
     }else{
         cout << "Error! Vector dimensions do not match for subtraction" << endl;
-        html << "<p class='error'>&#10060; Error! Error! Vector dimensions do not match for subtraction</p>";
+        html << "<p class='error'>&#10060; Error! Vector dimensions do not match for subtraction</p>";
     }
 
     //kV
