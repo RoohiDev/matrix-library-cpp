@@ -52,7 +52,7 @@ int main(){
     html << "</head>";
     html << "<body><header>";
     html <<"<h1>Matrix & Vector Operations Report</h1>";
-    html << "<h2>Amirhossein Rouhi - Fundamentals of Computer Programming Final Project</h2><hr>";
+    html << "<h2>Amirhossein Rouhi - Fundamentals of Computer Programming Final Project</h2>";
     html << "</header>";
 
     //inputs

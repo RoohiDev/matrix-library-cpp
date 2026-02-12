@@ -37,3 +37,6 @@ section h2{
 header, footer {
     text-align: center;
 }
+footer{
+    margin-top: 24px;
+}
