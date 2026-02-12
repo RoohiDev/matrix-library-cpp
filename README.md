@@ -43,7 +43,8 @@ demo.exe
 ```
 
 **On macOS or Linux:**
-```g++ matrix_library.cpp demonstration.cpp -o demo
+```bash
+g++ matrix_library.cpp demonstration.cpp -o demo
 ./demo
 ```
 
