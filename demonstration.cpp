@@ -102,10 +102,14 @@ int main(){
         }
     }
     print_matrix_html(html, mat_B, rows_B, cols_B);
+    
+    //Scalar Factor setup
+    double k;
+    cout << "\nEnter a scalar factor for matrix/vector multiplication: ";
+    cin >> k;
 
     double vec_A[10], vec_B[10], vec_result[10];
     int vec_size;
-
     //Vector A setup
     cout << "\nEnter size of vectors(max 10): ";
     cin >> vec_size;
@@ -171,7 +175,6 @@ int main(){
     }
 
     //kA
-    double k = 3.0; //scalar multiplication factor
     html <<"<h3>kA(k = " << k << ")</h3>";
     cout <<"\nkA(k = " << k << ") =" << endl;
     matrix_scalar_multiply(mat_A, mat_result, rows_A, cols_A, k);
@@ -237,7 +240,7 @@ int main(){
     html << "<p><b>Result (size = " << vec_size << "):</b></p>";
     print_vector_html(html, vec_result, vec_size);
 
-    //kV (k = 3)
+    //kV
     html <<"<h3>kA(k = " << k << ")</h3>";
     cout <<"\nkA(k = " << k << ") =" << endl;
     vector_scalar_multiply(vec_A, vec_result, vec_size, k);
