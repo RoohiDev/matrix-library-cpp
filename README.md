@@ -40,10 +40,12 @@ This project is a simple C++ library to do basic operations with matrices and ve
 ```bash
 g++ matrix_library.cpp demonstration.cpp -o demo.exe
 demo.exe
+```
 
 **On macOS or Linux:**
 ```g++ matrix_library.cpp demonstration.cpp -o demo
 ./demo
+```
 
 > **Note:** Put `matrix_library.cpp` and `demonstration.cpp` in the same folder. After running, the demo creates `report_sample.html` automatically.
 
