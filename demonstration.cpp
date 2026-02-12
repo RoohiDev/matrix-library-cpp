@@ -75,7 +75,7 @@ int main(){
         html << "</section></body></html>";
         return 0;
     }
-    html << "<h3>Matrix A (" << rowsA << " x " << colsA << "):</h3>";
+    html << "<h3>Matrix A (" << rowsA << " &times; " << colsA << "):</h3>";
     for(int i = 0; i < rowsA; i++){
         for(int j = 0; j < colsA; j++){
             cout << "Enter the ["<< i << "][" << j <<"] element of matrix A: ";
@@ -92,7 +92,7 @@ int main(){
         html << "</section></body></html>";
         return 0;
     }
-    html << "<h3>Matrix B (" << rowsB << " x " << colsB << "):</h3>";
+    html << "<h3>Matrix B (" << rowsB << " &times; " << colsB << "):</h3>";
     for(int i = 0; i < rowsB; i++){
         for(int j = 0; j < colsB; j++){
             cout << "Enter the ["<< i << "][" << j <<"] element of matrix B: ";
@@ -136,7 +136,7 @@ int main(){
     if(matrix_add(mat_A, mat_B, mat_result, rowsA, colsA, rowsB, colsB)){
         cout << "\nA + B =" << endl;
         print_matrix(mat_result, rowsA, colsA);
-        html << "<p><b>Result(" << rowsA << " x " << colsA << "):</b></p>";
+        html << "<p><b>Result(" << rowsA << " &times; " << colsA << "):</b></p>";
         print_matrix_html(html, mat_result, rowsA, colsA);
     }else{
     cout << "Error! Matrix dimensions do not match for addition!" << endl;
@@ -147,18 +147,18 @@ int main(){
     if(matrix_sub(mat_A, mat_B, mat_result, rowsA, colsA, rowsB, colsB)){
         cout << "\nA - B =" << endl;
         print_matrix(mat_result, rowsA, colsA);
-        html << "<p><b>Result (" << rowsA << " x " << colsA << "):</b></p>";
+        html << "<p><b>Result (" << rowsA << " &times; " << colsA << "):</b></p>";
         print_matrix_html(html, mat_result, rowsA, colsA);
     }else{
     cout << "Error! Matrix dimensions do not match for subtraction!" << endl;
     html << "<p class='error'>&#10060; Error! Matrix dimensions do not match for subtraction</p>";
     }
     //A x B
-    html <<"<h3>A x B</h3>";
+    html <<"<h3>A &times; B</h3>";
     if(matrix_multiply(mat_A, mat_B, mat_result, rowsA, colsA, rowsB, colsB)){
         cout << "\nA x B =" << endl;
         print_matrix(mat_result, rowsA, colsB);
-        html << "<p><b>Result (" << rowsA << " x " << colsB << "):</b></p>";
+        html << "<p><b>Result (" << rowsA << " &times; " << colsB << "):</b></p>";
         print_matrix_html(html, mat_result, rowsA, colsB);
     }else{
         cout << "Error! Matrix multiplication not possible (colsA != rowsB)" << endl;
@@ -170,14 +170,14 @@ int main(){
     cout <<"\nkA(k = " << k << ") =" << endl;
     matrix_scalar_multiply(mat_A, mat_result, rowsA, colsA, k);
     print_matrix(mat_result, rowsA, colsA);
-    html << "<p><b>Result (" << rowsA << " x " << colsA << "):</b></p>";
+    html << "<p><b>Result (" << rowsA << " &times; " << colsA << "):</b></p>";
     print_matrix_html(html, mat_result, rowsA, colsA);
     //A^T
     html <<"<h3>A<sup>T</sup></h3>";
     cout << "\nA^T =" << endl;
     matrix_transpose(mat_A, mat_result, rowsA, colsA);
     print_matrix(mat_result, colsA, rowsA);
-    html << "<p><b>Result (" << colsA << " x " << rowsA << "):</b></p>";
+    html << "<p><b>Result (" << colsA << " &times; " << rowsA << "):</b></p>";
     print_matrix_html(html, mat_result, colsA, rowsA);
     //|A|
     html <<"<h3>|A|</h3>";
@@ -195,7 +195,7 @@ int main(){
     if(matrix_inverse(mat_A, mat_result, rowsA, colsA)){
         cout << "\nA^(-1) =" << endl;
         print_matrix(mat_result, rowsA, colsA);
-        html << "<p><b>Result (" << rowsA << " x " << colsA << "):</b></p>";
+        html << "<p><b>Result (" << rowsA << " &times; " << colsA << "):</b></p>";
         print_matrix_html(html, mat_result, rowsA, colsA);
     }else{
         if(rowsA != colsA){
@@ -233,11 +233,11 @@ int main(){
     print_vector_html(html, vec_result, vec_size);
     //A . B
     double dot = vector_dot(vec_A, vec_B, vec_size);
-    html <<"<h3>A . B</h3>";
+    html <<"<h3>A &sdot; B</h3>";
     cout << "\nA . B = " << dot << endl;
     html << "<p><b>Result = " << dot << "</b></p>";    
     //A x B
-    html <<"<h3>A x B</h3>";
+    html <<"<h3>A &times; B</h3>";
     if(vector_cross(vec_A, vec_B, vec_result, vec_size)){
         cout << "\nA x B =" << endl;
         print_vector(vec_result, vec_size);
