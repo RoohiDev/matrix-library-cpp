@@ -54,7 +54,7 @@ The demo asks the user to enter the size and numbers for matrices and vectors. R
 
 ---
 
-##IMPLEMENTATION DETAILS
+## IMPLEMENTATION DETAILS
 
 The project is structured as a small C++ library with separate header (.h)
 and implementation (.cpp) files.
