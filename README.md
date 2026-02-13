@@ -54,6 +54,27 @@ The demo asks the user to enter the size and numbers for matrices and vectors. R
 
 ---
 
+##IMPLEMENTATION DETAILS
+
+The project is structured as a small C++ library with separate header (.h)
+and implementation (.cpp) files.
+
+Matrix and vector operations are implemented as normal functions.
+Determinant is calculated recursively using Laplace expansion.
+The inverse function calls the determinant function and builds
+the cofactor matrix before transposing it.
+
+The demonstration program handles user input and generates
+an HTML report using ofstream.
+
+Error handling is done using conditional checks before each operation
+to prevent invalid calculations.
+
+The maximum size of matrices and vectors is limited to 10
+to keep the program simple and avoid heavy recursive computation.
+
+---
+
 ## LIMITATIONS
 
 - Matrix and vector size cannot be more than 10.
@@ -67,8 +88,8 @@ The demo asks the user to enter the size and numbers for matrices and vectors. R
 - `matrix_library.cpp` – Code for matrix & vector operations
 - `demonstration.cpp` – Demo program that takes input and makes HTML
 - `style.css` – Optional CSS for HTML report
-- `README.txt` – This summary
-- `README.md` – A longer version of the project description
+- `README.txt` – A text version of the project description
+- `README.md` – This summary
 - `LICENSE` – License information for the project
 
 ---
