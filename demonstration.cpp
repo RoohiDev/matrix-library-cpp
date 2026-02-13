@@ -195,7 +195,7 @@ int main(){
     //|A|
     html <<"<h3>|A|</h3>";
     double det = matrix_determinant(mat_A, rows_A, cols_A);
-    if(!isnan(det)){
+    if(!std::isnan(det)){
         cout << "\n|A| = " << det << endl;
         html << "<p><b>Result = " << det << "</b></p>";
     }else{
@@ -263,7 +263,7 @@ int main(){
     //A . B
     html <<"<h3>A &sdot; B</h3>";
     double dot = vector_dot(vec_A, vec_B, vec_size_A, vec_size_B);
-    if(!isnan(dot)){
+    if(!std::isnan(dot)){
     cout << "\nA . B = " << dot << endl;
     html << "<p><b>Result = " << dot << "</b></p>";  
     }else{
